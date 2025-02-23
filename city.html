@@ -9,8 +9,52 @@
   <header>
     <h1>City game by Lohitha Vodnala</h1>
   </header>
-  <main>
-    <!-- Your game content will go here -->
-  </main>
+
+  <form id="cityForm" onsubmit="return false;">
+    <div>
+      <label for="secretCity">Where in the world:</label>
+      <!-- This input holds the secret value -->
+      <input type="password" id="secretCity" value="San Diego">
+    </div>
+    <div>
+      <label for="guessCity">Guess the city:</label>
+      <!-- This input will hold the user's guess -->
+      <input type="text" id="guessCity">
+    </div>
+    <div>
+      <!-- Button to trigger the checkCity() function -->
+      <button type="button" onclick="checkCity()">Check the guess</button>
+    </div>
+  </form>
+
+  <!-- Results holder element -->
+  <div id="results">Found: 0, Oops: 0</div>
+
+  <!-- JavaScript Section -->
+  <script>
+    // Global variables to keep track of correct and wrong guesses
+    let found = 0;
+    let oops = 0;
+    
+    function checkCity() {
+      // Retrieve the secret value and the user's guess from the form
+      const secret = document.getElementById('secretCity').value;
+      const guess = document.getElementById('guessCity').value;
+      
+      // Compare the two values
+      if (guess === secret) {
+        found++;
+        alert("GotCha");
+      } else {
+        oops++;
+        alert("Awe");
+      }
+      
+      // Update the results element with the current counts
+      document.getElementById('results').innerHTML = "Found: " + found + ", Oops: " + oops;
+    }
+  </script>
 </body>
 </html>
+ 
+
