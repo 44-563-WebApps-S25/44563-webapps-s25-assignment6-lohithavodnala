@@ -1,39 +1,65 @@
 <!DOCTYPE html>
-<html>
- 
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Lohitha's Dinner Plans</title>
+</head>
 <body>
+    <h1>Lohitha's Dinner Plans</h1>
 
-<h2>Getting input</h2>
+    <!-- Part 7: Checkboxes for Dinner Choices -->
+    <form>
+        <label><input type="checkbox" id="wine" value="True"> Serve Wine</label><br>
+        <label><input type="checkbox" id="outside" value="True"> Eat Outside</label><br>
+        <label><input type="checkbox" id="candles" value="False"> Light Candles</label><br><br>
 
-<form>
-    <label for="form1_age">What is your age </label>
-    <input type ="number" id="form1_age" name="form1_age" min=10 max=50 step=2 value=30> <br>
+        <button type="button" onclick="choices()">Dinner Choices</button>
+    </form>
 
-    <label for="form1_nick">What is your nickname </label>
-    <input type ="text" id="form1_nick" name="form1_nick" autofocus> <br>
+    <p id="dinnerResults"></p>
 
-    <input type="button" onclick="resolveForm()" value="Get values from form">
-</form>
+    <!-- Part 8: Adding Main Dish and Dessert -->
+    <h2>Customize Your Dinner</h2>
+    <form>
+        <label>Enter main dish: <input id="mainDish" type="text" value="Butter Chicken"></label><br><br>
+        <label>Enter dessert: <input id="dessert" type="text"></label><br><br>
 
+        <button type="button" onclick="updateDinner()">Update the Dinner</button>
+    </form>
 
-<p id="result">This text will be replaced </p>
+    <p id="updatedDinner"></p>
 
-<script> 
+    <script>
+        // Global object to store dinner choices
+        let my_dinner = {};
 
-function resolveForm (){
-    console.log("Getting form values")
-    age = document.getElementById("form1_age").value
-    nick = document.getElementById("form1_nick").value
-    confirmed = confirm("Are these the values? "+age+" and "+nick)
-    
-    out = document.getElementById("result")
-    if(confirmed){
-        out.innerHTML = "Values were confirmed"
-    } else {
-        out.innerHTML = "Values were not confirmed"
-    }
-}
-</script>
+        function choices() {
+            // Reset the object
+            my_dinner = {};
+
+            // Get checkbox values and set properties
+            my_dinner.wine = document.getElementById("wine").checked;
+            my_dinner.outside = document.getElementById("outside").checked;
+            my_dinner.candles = document.getElementById("candles").checked;
+
+            // Display the object as a string
+            document.getElementById("dinnerResults").innerHTML = "Dinner Choices: " + JSON.stringify(my_dinner);
+        }
+
+        function updateDinner() {
+            // Get values from text inputs
+            let mainDish = document.getElementById("mainDish").value;
+            let dessert = document.getElementById("dessert").value;
+
+            // Update the my_dinner object
+            my_dinner["main"] = mainDish;
+            my_dinner["dessert"] = dessert;
+
+            // Display updated dinner object
+            document.getElementById("updatedDinner").innerHTML = "Updated Dinner: " + JSON.stringify(my_dinner);
+        }
+    </script>
 
 </body>
-</html> 
+</html>
