@@ -30,17 +30,22 @@
   <!-- Results holder element -->
   <div id="results">Found: 0, Oops: 0</div>
 
+  <!-- Image Switching Section -->
+  <img id="petImage" src="husky1.jpg" alt="Pet Image" width="300">
+  <br>
+  <button onclick="updatePic()">Change Picture</button>
+
   <!-- JavaScript Section -->
   <script>
     // Global variables to keep track of correct and wrong guesses
     let found = 0;
     let oops = 0;
-    
+
     function checkCity() {
       // Retrieve the secret value and the user's guess from the form
       const secret = document.getElementById('secretCity').value;
       const guess = document.getElementById('guessCity').value;
-      
+
       // Compare the two values
       if (guess === secret) {
         found++;
@@ -49,17 +54,18 @@
         oops++;
         alert("Awe");
       }
-      
+
       // Update the results element with the current counts
       document.getElementById('results').innerHTML = "Found: " + found + ", Oops: " + oops;
     }
-    // Global variable to track which pet image to use
+
+    // Variable to track which image to show
     var usePic = 1;
-    
+
     // Function to update the pet image based on the current value of usePic
     function updatePic() {
       var petImg = document.getElementById('petImage');
-      
+
       // Use a switch statement to cycle through the images
       switch (usePic) {
         case 1:
@@ -82,5 +88,3 @@
   </script>
 </body>
 </html>
- 
-
