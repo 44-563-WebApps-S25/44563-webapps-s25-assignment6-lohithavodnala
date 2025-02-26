@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Lohitha's Message Cost Calculator</title>
+</head>
+<body>
+    <h1>Lohitha's Message Cost</h1>
+
+    <label>Enter cost per letter: <input id="basicprice" type="number" value="0.50"></label><br><br>
+    <label>Enter the length needed for discount: <input id="breakAt" type="number" value="9"></label><br><br>
+    <label>Enter the discount percent: <input id="discount" type="number" value="10"></label><br><br>
+
+    <button onclick="amounts()">Show total</button>
+
+    <p id="totalCost"></p>
+
+    <script>
+        function amounts() {
+            let price = parseFloat(document.getElementById("basicprice").value);
+            let breakAt = parseInt(document.getElementById("breakAt").value);
+            let discount = parseFloat(document.getElementById("discount").value);
+            let myResults = "";
+
+            for (let size = breakAt - 3; size <= breakAt + 3; size++) {
+                let cost;
+                if (size < breakAt) {
+                    cost = size * price;
+                } else {
+                    cost = size * price * (1 - discount / 100);
+                }
+                myResults += `Size ${size} costs ${cost.toFixed(2)}; `;
+            }
+
+            document.getElementById("totalCost").innerHTML = "Totals are: " + myResults;
+        }
+    </script>
+
+    <h2>Choose an Operation</h2>
+
+    <form>
+        <label><input type="radio" name="operation" value="times" onclick="chooseOp()"> Product</label><br>
+        <label><input type="radio" name="operation" value="add" onclick="chooseOp()"> Sum</label><br>
+        <label><input type="radio" name="operation" value="mod" onclick="chooseOp()"> Mod</label><br>
+    </form>
+
+    <p id="operationResult"></p>
+
+    <script>
+        function chooseOp() {
+            let price = parseFloat(document.getElementById("basicprice").value);
+            let breakAt = parseInt(document.getElementById("breakAt").value);
+            let selectedOp = document.querySelector('input[name="operation"]:checked').value;
+            let result;
+
+            switch (selectedOp) {
+                case "times":
+                    result = price * breakAt;
+                    break;
+                case "add":
+                    result = price + breakAt;
+                    break;
+                case "mod":
+                    result = breakAt % price;
+                    break;
+            }
+
+            document.getElementById("operationResult").innerHTML = `Result: ${breakAt} ${selectedOp} ${price} = ${result.toFixed(2)}`;
+        }
+    </script>
+
+</body>
+</html>
