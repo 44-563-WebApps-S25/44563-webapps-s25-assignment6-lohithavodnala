@@ -53,6 +53,32 @@
       // Update the results element with the current counts
       document.getElementById('results').innerHTML = "Found: " + found + ", Oops: " + oops;
     }
+    // Global variable to track which pet image to use
+    var usePic = 1;
+    
+    // Function to update the pet image based on the current value of usePic
+    function updatePic() {
+      var petImg = document.getElementById('petImage');
+      
+      // Use a switch statement to cycle through the images
+      switch (usePic) {
+        case 1:
+          petImg.src = "husky1.jpg";
+          usePic = 2;
+          break;
+        case 2:
+          petImg.src = "hedgehog.jpeg";
+          usePic = 3;
+          break;
+        case 3:
+          petImg.src = "akita.jpeg";
+          usePic = 1;
+          break;
+        default:
+          usePic = 1;
+          break;
+      }
+    }
   </script>
 </body>
 </html>
